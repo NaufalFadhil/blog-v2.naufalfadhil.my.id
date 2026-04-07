@@ -1,6 +1,6 @@
 # Deployment Guide — Docker + VPS
 
-This guide covers deploying Docs Stashidea to a VPS using Docker.
+This guide covers deploying Blog Naufal Fadhil to a VPS using Docker.
 
 Two strategies are covered:
 1. **SSG (Static)** — Generate static files, serve with Nginx
@@ -82,14 +82,14 @@ server {
 
 ```bash
 # Build image
-docker build -t docs-stashidea .
+docker build -t blog-naufalfadhil .
 
 # Run container
 docker run -d \
-  --name docs-stashidea \
+  --name blog-naufalfadhil \
   --restart unless-stopped \
   -p 3000:80 \
-  docs-stashidea
+  blog-naufalfadhil
 ```
 
 Site available at `http://your-vps-ip:3000`
@@ -132,13 +132,13 @@ CMD ["node", ".output/server/index.mjs"]
 ### Build & Run
 
 ```bash
-docker build -f Dockerfile.ssr -t docs-stashidea .
+docker build -f Dockerfile.ssr -t blog-naufalfadhil .
 
 docker run -d \
-  --name docs-stashidea \
+  --name blog-naufalfadhil \
   --restart unless-stopped \
   -p 3000:3000 \
-  docs-stashidea
+  blog-naufalfadhil
 ```
 
 ---
@@ -151,9 +151,9 @@ Create `docker-compose.yml`:
 version: "3.8"
 
 services:
-  docs:
+  blog:
     build: .
-    container_name: docs-stashidea
+    container_name: blog-naufalfadhil
     restart: unless-stopped
     ports:
       - "3000:80"
@@ -167,7 +167,7 @@ docker compose up -d
 docker compose up -d --build
 
 # View logs
-docker compose logs -f docs
+docker compose logs -f blog
 
 # Stop
 docker compose down
@@ -201,8 +201,8 @@ docker compose version
 
 ```bash
 # Clone repository
-git clone <your-repo-url> /opt/docs-stashidea
-cd /opt/docs-stashidea
+git clone <your-repo-url> /opt/blog-naufalfadhil
+cd /opt/blog-naufalfadhil
 
 # Build and run
 docker compose up -d --build
@@ -216,12 +216,12 @@ If you want to serve on port 80/443 with a domain:
 sudo apt install nginx -y
 ```
 
-Create `/etc/nginx/sites-available/docs-stashidea`:
+Create `/etc/nginx/sites-available/blog-naufalfadhil`:
 
 ```nginx
 server {
     listen 80;
-    server_name docs.yourdomain.com;
+    server_name blog.yourdomain.com;
 
     location / {
         proxy_pass http://127.0.0.1:3000;
@@ -235,7 +235,7 @@ server {
 
 ```bash
 # Enable site
-sudo ln -s /etc/nginx/sites-available/docs-stashidea /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/blog-naufalfadhil /etc/nginx/sites-enabled/
 
 # Test & reload
 sudo nginx -t
@@ -249,7 +249,7 @@ sudo systemctl reload nginx
 sudo apt install certbot python3-certbot-nginx -y
 
 # Get certificate
-sudo certbot --nginx -d docs.yourdomain.com
+sudo certbot --nginx -d blog.yourdomain.com
 
 # Auto-renewal is enabled by default
 sudo certbot renew --dry-run
@@ -281,7 +281,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /opt/docs-stashidea
+            cd /opt/blog-naufalfadhil
             git pull origin main
             docker compose up -d --build
 ```
@@ -301,7 +301,7 @@ After adding or editing markdown files:
 # Local: just save the file, dev server hot-reloads
 
 # Production: rebuild the container
-cd /opt/docs-stashidea
+cd /opt/blog-naufalfadhil
 git pull
 docker compose up -d --build
 ```
@@ -314,7 +314,7 @@ docker compose up -d --build
 
 ```bash
 # Check logs
-docker logs docs-stashidea
+docker logs blog-naufalfadhil
 
 # Check if port is in use
 sudo lsof -i :3000
@@ -334,7 +334,7 @@ ENV NODE_OPTIONS="--max-old-space-size=2048"
 docker ps
 
 # Check container health
-docker logs docs-stashidea
+docker logs blog-naufalfadhil
 
 # Restart
 docker compose restart

@@ -28,12 +28,12 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'StashIdea — Personal Docs',
+      title: 'Naufal Fadhil — Personal Blog',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Personal documentation, snippets, and notes' },
-        { property: 'og:title', content: 'StashIdea — Personal Docs' },
+        { property: 'og:title', content: 'Naufal Fadhil — Personal Blog' },
         { property: 'og:description', content: 'Personal documentation, snippets, and notes' },
         { property: 'og:type', content: 'website' },
       ],

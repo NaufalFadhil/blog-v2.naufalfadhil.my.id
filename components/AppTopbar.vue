@@ -18,8 +18,8 @@
           <svg class="w-6 h-6 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
           </svg>
-          <span v-if="showAuth && auth.isAuthenticated.value" class="hidden sm:inline">Stashidea Internal</span>
-          <span v-else class="hidden sm:inline">Docs Stashidea</span>
+          <span v-if="showAuth && auth.isAuthenticated.value" class="hidden sm:inline">Naufal Fadhil Internal</span>
+          <span v-else class="hidden sm:inline">Blog Naufal Fadhil</span>
         </NuxtLink>
       </div>
 
@@ -82,17 +82,6 @@
                 </button>
               </div>
             </div>
-          </template>
-          <template v-else>
-            <NuxtLink
-              to="/login"
-              class="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              <span class="hidden sm:inline">Login</span>
-            </NuxtLink>
           </template>
         </template>
       </div>

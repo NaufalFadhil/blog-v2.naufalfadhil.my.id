@@ -208,13 +208,13 @@ const rootNodes = computed<TreeNode[]>(() => {
 // Drill-down state
 const stack = ref<StackEntry[]>([])
 const currentNodes = ref<TreeNode[]>([])
-const currentLabel = ref('Docs')
+const currentLabel = ref('Blog')
 
 // Initialize and keep in sync when content loads
 watch(rootNodes, (nodes) => {
   if (stack.value.length === 0) {
     currentNodes.value = nodes
-    currentLabel.value = 'Docs'
+    currentLabel.value = 'Blog'
   }
 }, { immediate: true })
 
@@ -260,7 +260,7 @@ watch(
 
     stack.value = []
     let nodes = rootNodes.value
-    currentLabel.value = 'Docs'
+    currentLabel.value = 'Blog'
     currentNodes.value = nodes
 
     for (let i = 0; i < parts.length - 1; i++) {

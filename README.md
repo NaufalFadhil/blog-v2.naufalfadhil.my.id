@@ -1,4 +1,4 @@
-# Docs Stashidea
+# Blog Naufal Fadhil
 
 Personal documentation site built with Nuxt 3, Tailwind CSS, and @nuxt/content.
 
@@ -21,7 +21,7 @@ Personal documentation site built with Nuxt 3, Tailwind CSS, and @nuxt/content.
 
 ```bash
 git clone <your-repo-url>
-cd app-stashidea-docs-frontend
+cd app-naufalfadhil-blog-frontend
 npm install
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: "Getting Started with Internal Docs"
+title: "Getting Started with Internal Blog"
 internal: true
 tags: [internal, guide]
 date: 2026-03-29

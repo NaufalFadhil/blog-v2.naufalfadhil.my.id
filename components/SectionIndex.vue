@@ -130,6 +130,6 @@ function formatDate(date: string): string {
 }
 
 useHead({
-  title: `${props.title} — StashIdea`,
+  title: `${props.title} — Naufal Fadhil`,
 })
 </script>

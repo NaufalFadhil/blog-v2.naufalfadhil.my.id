@@ -2,14 +2,14 @@
 set -euo pipefail
 
 # ============================================================
-# Deploy script for stashidea-docs frontend
+# Deploy script for naufalfadhil-blog frontend
 # Builds multi-platform Docker image and deploys via SSH
 # ============================================================
 
 # -- Configuration (edit these) --------------------------------
-IMAGE_NAME="stashidea-docs"
+IMAGE_NAME="naufalfadhil-blog"
 IMAGE_TAG="latest"
-CONTAINER_NAME="stashidea-docs"
+CONTAINER_NAME="naufalfadhil-blog"
 CONTAINER_PORT=3000
 HOST_PORT=3000
 

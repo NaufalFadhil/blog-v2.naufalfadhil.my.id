@@ -72,7 +72,7 @@ function formatDate(date: string): string {
 }
 
 useHead({
-  title: `Posts tagged "${tag}" — StashIdea`,
+  title: `Posts tagged "${tag}" — Naufal Fadhil`,
   meta: [
     { name: 'description', content: `All posts tagged with "${tag}"` },
   ],

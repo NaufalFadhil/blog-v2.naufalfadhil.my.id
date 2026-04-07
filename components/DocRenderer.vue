@@ -43,7 +43,7 @@ function formatDate(date: string): string {
 }
 
 useHead({
-  title: computed(() => props.doc?.title ?? 'StashIdea'),
+  title: computed(() => props.doc?.title ?? 'Naufal Fadhil'),
   meta: [
     { name: 'description', content: computed(() => props.doc?.description ?? '') },
     { property: 'og:title', content: computed(() => props.doc?.title ?? '') },

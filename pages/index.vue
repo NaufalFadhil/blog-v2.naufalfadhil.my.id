@@ -5,7 +5,7 @@
       <!-- Hero -->
       <section class="mb-12">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">
-          StashIdea
+          Naufal Fadhil
         </h1>
         <p class="text-gray-500 dark:text-gray-400">
           Personal documentation, code snippets, and notes. Search with
@@ -183,6 +183,6 @@ function formatDate(date: string): string {
 }
 
 useHead({
-  title: 'StashIdea — Personal Docs',
+  title: 'Naufal Fadhil — Personal Blog',
 })
 </script>

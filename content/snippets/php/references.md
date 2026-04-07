@@ -32,7 +32,7 @@ function addSuffix(string &$text, string $suffix): void
 
 $name = 'Stash';
 addSuffix($name, 'Idea');
-echo $name;  // Outputs: StashIdea
+echo $name;  // Outputs: Naufal Fadhil
 ```
 
 ## References in Loops

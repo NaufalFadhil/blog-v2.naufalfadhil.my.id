@@ -51,7 +51,7 @@
 
       <div class="mt-6 text-center">
         <NuxtLink to="/" class="text-sm text-gray-500 dark:text-gray-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">
-          ← Back to docs
+          ← Back to blog
         </NuxtLink>
       </div>
     </div>
@@ -98,5 +98,5 @@ async function handleSubmit() {
   }
 }
 
-useHead({ title: 'Sign in — StashIdea' })
+useHead({ title: 'Sign in — Naufal Fadhil' })
 </script>
