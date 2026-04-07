@@ -13,9 +13,10 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const auth = useAuth()
 const rawSlug = Array.isArray(route.params.slug) ? route.params.slug.join('/') : route.params.slug
 const slug = String(rawSlug ?? '').replace(/[^a-z0-9/_.-]/gi, '').replace(/\.{2,}/g, '')
-const path = `/external/${slug}`
+const path = `/thoughts/${slug}`
 
 const { data: doc } = await useAsyncData(`content-${path}`, () =>
   queryContent(path).findOne()
@@ -24,5 +25,10 @@ const { data: doc } = await useAsyncData(`content-${path}`, () =>
 if (!doc.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
-// No auth check — anyone with the URL can view external pages
+
+onMounted(() => {
+  if (doc.value && !auth.canAccess(doc.value as Record<string, unknown>)) {
+    navigateTo(`/login?redirect=${encodeURIComponent(route.path)}`)
+  }
+})
 </script>

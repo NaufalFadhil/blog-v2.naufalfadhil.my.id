@@ -16,7 +16,7 @@ const route = useRoute()
 const auth = useAuth()
 const rawSlug = Array.isArray(route.params.slug) ? route.params.slug.join('/') : route.params.slug
 const slug = String(rawSlug ?? '').replace(/[^a-z0-9/_.-]/gi, '').replace(/\.{2,}/g, '')
-const path = `/til/${slug}`
+const path = `/documentation/${slug}`
 
 const { data: doc } = await useAsyncData(`content-${path}`, () =>
   queryContent(path).findOne()
