@@ -129,11 +129,13 @@ const allContent = computed(() => {
 })
 
 const sectionConfig = [
-  { prefix: '/snippets', label: 'Snippets' },
-  { prefix: '/til', label: 'TIL' },
+  { prefix: '/research', label: 'Research' },
+  { prefix: '/documentation', label: 'Documentation' },
+  { prefix: '/slice-of-life', label: 'Slice of Life' },
+  { prefix: '/review', label: 'Review' },
+  { prefix: '/thoughts', label: 'Thoughts' },
   { prefix: '/notes', label: 'Notes' },
   { prefix: '/internal', label: 'Internal' },
-  { prefix: '/external', label: 'External' },
 ]
 
 interface ContentItem {
@@ -208,13 +210,13 @@ const rootNodes = computed<TreeNode[]>(() => {
 // Drill-down state
 const stack = ref<StackEntry[]>([])
 const currentNodes = ref<TreeNode[]>([])
-const currentLabel = ref('Blog')
+const currentLabel = ref('Menu')
 
 // Initialize and keep in sync when content loads
 watch(rootNodes, (nodes) => {
   if (stack.value.length === 0) {
     currentNodes.value = nodes
-    currentLabel.value = 'Blog'
+    currentLabel.value = 'Menu'
   }
 }, { immediate: true })
 
@@ -260,7 +262,7 @@ watch(
 
     stack.value = []
     let nodes = rootNodes.value
-    currentLabel.value = 'Blog'
+    currentLabel.value = 'Menu'
     currentNodes.value = nodes
 
     for (let i = 0; i < parts.length - 1; i++) {

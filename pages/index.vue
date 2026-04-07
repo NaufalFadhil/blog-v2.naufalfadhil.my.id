@@ -110,7 +110,7 @@ const { data: recentPosts } = await useAsyncData('recent-posts', () =>
 
 const { data: allContent } = await useAsyncData('section-counts', () =>
   queryContent('/')
-    .where({ _partial: false, draft: { $ne: true }, internal: { $ne: true } })
+    .where({ _partial: false, draft: { $ne: true }, internal: { $ne: true }, external: { $ne: true } })
     .only(['_path'])
     .find()
 )
@@ -130,24 +130,45 @@ const sections = computed(() => {
   const items = allContent.value ?? []
   const base = [
     {
-      path: '/snippets',
-      label: 'Snippets',
-      icon: '📝',
-      description: 'Code snippets and quick references',
-      count: items.filter((i) => i._path?.startsWith('/snippets')).length,
+      path: '/research',
+      label: 'Research',
+      icon: '🔬',
+      description: 'Explorations, experiments, and findings',
+      count: items.filter((i) => i._path?.startsWith('/research')).length,
     },
     {
-      path: '/til',
-      label: 'TIL',
-      icon: '💡',
-      description: 'Today I learned — short discoveries',
-      count: items.filter((i) => i._path?.startsWith('/til')).length,
+      path: '/documentation',
+      label: 'Documentation',
+      icon: '📚',
+      description: 'Technical references and how-tos',
+      count: items.filter((i) => i._path?.startsWith('/documentation')).length,
+    },
+    {
+      path: '/slice-of-life',
+      label: 'Slice of Life',
+      icon: '🌿',
+      description: 'Everyday moments and personal stories',
+      count: items.filter((i) => i._path?.startsWith('/slice-of-life')).length,
+    },
+    {
+      path: '/review',
+      label: 'Review',
+      icon: '⭐',
+      description: 'Books, tools, products, and more',
+      count: items.filter((i) => i._path?.startsWith('/review')).length,
+    },
+    {
+      path: '/thoughts',
+      label: 'Thoughts',
+      icon: '💭',
+      description: 'Opinions, essays, and reflections',
+      count: items.filter((i) => i._path?.startsWith('/thoughts')).length,
     },
     {
       path: '/notes',
       label: 'Notes',
       icon: '📒',
-      description: 'In-depth notes and documentation',
+      description: 'Quick notes and loose ideas',
       count: items.filter((i) => i._path?.startsWith('/notes')).length,
     },
   ]
