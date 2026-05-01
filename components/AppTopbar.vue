@@ -5,7 +5,7 @@
     <div class="flex items-center justify-between h-14 px-4 lg:px-6">
       <div class="flex items-center gap-3">
         <button
-          class="lg:hidden p-2 rounded-md text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+          class="p-2 rounded-md text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
           @click="$emit('toggle-sidebar')"
           aria-label="Toggle sidebar"
         >

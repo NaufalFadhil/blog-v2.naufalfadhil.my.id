@@ -7,7 +7,12 @@
 
     <AppSidebar :is-open="sidebarOpen" @close="sidebarOpen = false" />
 
-    <main class="flex-1 min-w-0 lg:ml-64 px-4 lg:px-8 py-8">
+    <main
+      :class="[
+        'flex-1 min-w-0 px-4 lg:px-8 py-8 transition-[margin] duration-200 ease-in-out',
+        sidebarOpen ? 'lg:ml-64' : '',
+      ]"
+    >
       <slot />
     </main>
 
@@ -18,4 +23,7 @@
 <script setup lang="ts">
 const sidebarOpen = ref(false)
 const search = useSearch()
-</script>
+
+onMounted(() => {
+  sidebarOpen.value = window.innerWidth >= 1024
+})
