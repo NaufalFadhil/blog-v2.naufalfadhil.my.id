@@ -92,50 +92,19 @@ interface StackEntry {
   nodes: TreeNode[]
 }
 
-const auth = useAuth()
-
-const { data: publicContent } = await useAsyncData('sidebar-content', () =>
+const { data: allContent } = await useAsyncData('sidebar-content', () =>
   queryContent('/')
-    .where({ _partial: false, draft: { $ne: true }, internal: { $ne: true }, external: { $ne: true } })
+    .where({ _partial: false, draft: { $ne: true } })
     .only(['_path', 'title', 'weight'])
     .sort({ weight: 1, _path: 1 })
     .find()
 )
 
-const protectedContent = ref<{ _path: string; title: string; weight?: number }[]>([])
-
-onMounted(async () => {
-  if (!auth.isAuthenticated.value) return
-  const all = await queryContent('/')
-    .where({ _partial: false })
-    .only(['_path', 'title', 'weight', 'internal', 'internal_access', 'external'])
-    .sort({ weight: 1, _path: 1 })
-    .find()
-  protectedContent.value = all.filter(
-    (p) => (p.internal === true || p.external === true) && auth.canAccess(p as Record<string, unknown>)
-  ) as { _path: string; title: string; weight?: number }[]
-})
-
-const allContent = computed(() => {
-  const pub = publicContent.value ?? []
-  if (protectedContent.value.length === 0) return pub
-  const map = new Map<string, { _path: string; title: string; weight?: number }>()
-  for (const item of [...pub, ...protectedContent.value]) {
-    if (item._path) map.set(item._path, item)
-  }
-  return Array.from(map.values()).sort((a, b) =>
-    (a.weight ?? 9999) - (b.weight ?? 9999) || (a._path ?? '').localeCompare(b._path ?? '')
-  )
-})
-
 const sectionConfig = [
-  { prefix: '/research', label: 'Research' },
-  { prefix: '/documentation', label: 'Documentation' },
-  { prefix: '/slice-of-life', label: 'Slice of Life' },
-  { prefix: '/review', label: 'Review' },
-  { prefix: '/thoughts', label: 'Thoughts' },
-  { prefix: '/notes', label: 'Notes' },
-  { prefix: '/internal', label: 'Internal' },
+  { prefix: '/competitive-programming', label: 'Competitive Programming' },
+  { prefix: '/docker', label: 'Docker' },
+  { prefix: '/javascript', label: 'JavaScript' },
+  { prefix: '/php', label: 'PHP' },
 ]
 
 interface ContentItem {

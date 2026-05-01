@@ -1,6 +1,6 @@
 # Deployment Guide — Docker + VPS
 
-This guide covers deploying Blog Naufal Fadhil to a VPS using Docker.
+This guide covers deploying Docs Naufal Fadhil to a VPS using Docker.
 
 Two strategies are covered:
 1. **SSG (Static)** — Generate static files, serve with Nginx

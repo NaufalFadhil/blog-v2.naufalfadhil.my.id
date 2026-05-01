@@ -1,4 +1,4 @@
-# Blog Naufal Fadhil
+# Naufal Fadhil's Personal Documentation Site
 
 Personal documentation site built with Nuxt 3, Tailwind CSS, and @nuxt/content.
 

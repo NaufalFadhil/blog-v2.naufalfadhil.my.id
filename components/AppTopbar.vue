@@ -19,7 +19,7 @@
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
           </svg>
           <span v-if="showAuth && auth.isAuthenticated.value" class="hidden sm:inline">Naufal Fadhil Internal</span>
-          <span v-else class="hidden sm:inline">Blog Naufal Fadhil</span>
+          <span v-else class="hidden sm:inline">Naufal Fadhil's Docs</span>
         </NuxtLink>
       </div>
 

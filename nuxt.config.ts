@@ -10,7 +10,7 @@ export default defineNuxtConfig({
         default: 'github-light',
         dark: 'github-dark',
       },
-      langs: ['php', 'js', 'jsx', 'json', 'ts', 'tsx', 'vue', 'css', 'html', 'bash', 'md', 'mdc', 'yaml', 'dockerfile', 'sql'],
+      langs: ['php', 'js', 'jsx', 'json', 'ts', 'tsx', 'vue', 'css', 'html', 'bash', 'md', 'mdc', 'yaml', 'dockerfile', 'sql', 'python'],
     },
     markdown: {
       anchorLinks: true,

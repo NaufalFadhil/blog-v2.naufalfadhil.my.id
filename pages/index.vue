@@ -8,7 +8,7 @@
           Naufal Fadhil
         </h1>
         <p class="text-gray-500 dark:text-gray-400">
-          Personal documentation, code snippets, and notes. Search with
+          Programming references and technical notes. Search with
           <kbd class="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-800 rounded">⌘K</kbd>
         </p>
       </section>
@@ -97,11 +97,9 @@
 </template>
 
 <script setup lang="ts">
-const auth = useAuth()
-
 const { data: recentPosts } = await useAsyncData('recent-posts', () =>
   queryContent('/')
-    .where({ _partial: false, draft: { $ne: true }, internal: { $ne: true } })
+    .where({ _partial: false, draft: { $ne: true } })
     .only(['_path', 'title', 'date'])
     .sort({ date: -1 })
     .limit(3)
@@ -110,78 +108,43 @@ const { data: recentPosts } = await useAsyncData('recent-posts', () =>
 
 const { data: allContent } = await useAsyncData('section-counts', () =>
   queryContent('/')
-    .where({ _partial: false, draft: { $ne: true }, internal: { $ne: true }, external: { $ne: true } })
+    .where({ _partial: false, draft: { $ne: true } })
     .only(['_path'])
     .find()
 )
 
-const internalCount = ref(0)
-
-onMounted(async () => {
-  if (!auth.isAuthenticated.value) return
-  const items = await queryContent('/')
-    .where({ _partial: false, internal: true })
-    .only(['_path'])
-    .find()
-  internalCount.value = items.filter((i) => auth.canAccess(i as Record<string, unknown>)).length
-})
-
 const sections = computed(() => {
   const items = allContent.value ?? []
-  const base = [
+  return [
     {
-      path: '/research',
-      label: 'Research',
-      icon: '🔬',
-      description: 'Explorations, experiments, and findings',
-      count: items.filter((i) => i._path?.startsWith('/research')).length,
+      path: '/competitive-programming',
+      label: 'Competitive Programming',
+      icon: '🏆',
+      description: 'Algorithms, data structures, and problem solving',
+      count: items.filter((i) => i._path?.startsWith('/competitive-programming')).length,
     },
     {
-      path: '/documentation',
-      label: 'Documentation',
-      icon: '📚',
-      description: 'Technical references and how-tos',
-      count: items.filter((i) => i._path?.startsWith('/documentation')).length,
+      path: '/docker',
+      label: 'Docker',
+      icon: '🐳',
+      description: 'Containers, images, and orchestration',
+      count: items.filter((i) => i._path?.startsWith('/docker')).length,
     },
     {
-      path: '/slice-of-life',
-      label: 'Slice of Life',
-      icon: '🌿',
-      description: 'Everyday moments and personal stories',
-      count: items.filter((i) => i._path?.startsWith('/slice-of-life')).length,
+      path: '/javascript',
+      label: 'JavaScript',
+      icon: '🟨',
+      description: 'JS patterns, APIs, and runtime behavior',
+      count: items.filter((i) => i._path?.startsWith('/javascript')).length,
     },
     {
-      path: '/review',
-      label: 'Review',
-      icon: '⭐',
-      description: 'Books, tools, products, and more',
-      count: items.filter((i) => i._path?.startsWith('/review')).length,
-    },
-    {
-      path: '/thoughts',
-      label: 'Thoughts',
-      icon: '💭',
-      description: 'Opinions, essays, and reflections',
-      count: items.filter((i) => i._path?.startsWith('/thoughts')).length,
-    },
-    {
-      path: '/notes',
-      label: 'Notes',
-      icon: '📒',
-      description: 'Quick notes and loose ideas',
-      count: items.filter((i) => i._path?.startsWith('/notes')).length,
+      path: '/php',
+      label: 'PHP',
+      icon: '🐘',
+      description: 'PHP language features and design patterns',
+      count: items.filter((i) => i._path?.startsWith('/php')).length,
     },
   ]
-  if (auth.isAuthenticated.value) {
-    base.push({
-      path: '/internal',
-      label: 'Internal',
-      icon: '🔒',
-      description: 'Private pages for authenticated users',
-      count: internalCount.value,
-    })
-  }
-  return base
 })
 
 const upperCaseWords = new Set(['php', 'css', 'html', 'js', 'ts', 'sql', 'api', 'cli', 'sdk', 'ui', 'ux', 'ci', 'cd', 'aws', 'gcp', 'npm', 'vue', 'jwt', 'ssh', 'dns', 'tcp', 'udp', 'http', 'https', 'til'])
