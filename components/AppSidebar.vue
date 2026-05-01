@@ -58,7 +58,6 @@
               :to="node.path!"
               class="sidebar-link"
               active-class="sidebar-link-active"
-              @click="$emit('close')"
             >
               {{ node.label }}
             </NuxtLink>
