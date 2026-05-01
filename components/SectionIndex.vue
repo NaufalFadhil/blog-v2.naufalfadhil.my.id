@@ -8,7 +8,7 @@
 
     <div class="space-y-3">
       <NuxtLink
-        v-for="post in posts"
+        v-for="post in (posts ?? [])"
         :key="post._path"
         :to="post._path"
         class="flex items-center justify-between gap-4 px-6 py-3 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
@@ -37,14 +37,6 @@
               {{ tag }}
             </span>
           </div>
-          <span
-            v-if="post.draft"
-            class="hidden sm:inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400"
-          >draft</span>
-          <span
-            v-else-if="post.internal"
-            class="hidden sm:inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400"
-          >internal</span>
           <span v-if="post.date" class="text-xs text-gray-400">
             {{ formatDate(post.date) }}
           </span>
@@ -52,7 +44,7 @@
       </NuxtLink>
     </div>
 
-    <p v-if="posts.length === 0" class="text-center py-12 text-gray-500 dark:text-gray-400">
+    <p v-if="!posts?.length" class="text-center py-12 text-gray-500 dark:text-gray-400">
       No content yet.
     </p>
   </div>
@@ -67,47 +59,13 @@ const props = defineProps<{
   description: string
 }>()
 
-const auth = useAuth()
-
-const { data } = await useAsyncData(`section-${props.section}`, () =>
+const { data: posts } = await useAsyncData(`section-${props.section}`, () =>
   queryContent(`/${props.section}`)
-    .where({ _partial: false, draft: { $ne: true }, internal: { $ne: true } })
+    .where({ _partial: false, draft: { $ne: true } })
     .only(['_path', 'title', 'description', 'tags', 'date'])
     .sort({ date: -1 })
     .find()
 )
-
-// Extra protected posts loaded client-side when authenticated
-const protectedPosts = ref<typeof data.value>([])
-
-onMounted(async () => {
-  if (!auth.isAuthenticated.value) return
-  const all = await queryContent(`/${props.section}`)
-    .where({ _partial: false })
-    .only(['_path', 'title', 'description', 'tags', 'date', 'draft', 'internal', 'internal_access'])
-    .sort({ date: -1 })
-    .find()
-  // Only keep items that are protected and accessible to this user
-  protectedPosts.value = all.filter(
-    (p) => (p.draft === true || p.internal === true) && auth.canAccess(p as Record<string, unknown>)
-  )
-})
-
-const posts = computed(() => {
-  if (!auth.isAuthenticated.value || protectedPosts.value.length === 0) {
-    return data.value ?? []
-  }
-  // Merge public + protected, dedupe by _path, sort by date
-  const map = new Map<string, (typeof data.value)[0]>()
-  for (const p of [...(data.value ?? []), ...(protectedPosts.value ?? [])]) {
-    if (p && p._path) map.set(p._path, p)
-  }
-  return Array.from(map.values()).sort((a, b) => {
-    const da = a.date ? new Date(a.date).getTime() : 0
-    const db = b.date ? new Date(b.date).getTime() : 0
-    return db - da
-  })
-})
 
 const upperCaseWords = new Set(['php', 'css', 'html', 'js', 'ts', 'sql', 'api', 'cli', 'sdk', 'ui', 'ux', 'ci', 'cd', 'aws', 'gcp', 'npm', 'vue', 'jwt', 'ssh', 'dns', 'tcp', 'udp', 'http', 'https', 'til'])
 

@@ -18,8 +18,7 @@
           <svg class="w-6 h-6 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
           </svg>
-          <span v-if="showAuth && auth.isAuthenticated.value" class="hidden sm:inline">Naufal Fadhil Internal</span>
-          <span v-else class="hidden sm:inline">Naufal Fadhil's Docs</span>
+          <span class="hidden sm:inline">Naufal Fadhil's Docs</span>
         </NuxtLink>
       </div>
 
@@ -50,40 +49,6 @@
           </svg>
         </button>
 
-        <!-- Auth: show user badge + logout when authenticated, login button otherwise -->
-        <template v-if="showAuth">
-          <template v-if="auth.isAuthenticated.value">
-            <div class="relative" ref="profileRef">
-              <button
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 text-xs font-semibold hover:ring-2 hover:ring-primary-400 transition-all"
-                @click="profileOpen = !profileOpen"
-                aria-label="Account menu"
-              >
-                {{ initials }}
-              </button>
-
-              <!-- Dropdown -->
-              <div
-                v-if="profileOpen"
-                class="absolute right-0 top-full mt-2 w-56 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg z-50 overflow-hidden"
-              >
-                <div class="px-4 py-3 border-b border-gray-100 dark:border-gray-800">
-                  <p class="text-xs text-gray-400 dark:text-gray-500 mb-0.5">Signed in as</p>
-                  <p class="text-sm font-medium text-gray-900 dark:text-white truncate">{{ auth.userEmail.value }}</p>
-                </div>
-                <button
-                  class="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-                  @click="handleLogout"
-                >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                  </svg>
-                  Sign out
-                </button>
-              </div>
-            </div>
-          </template>
-        </template>
       </div>
     </div>
   </header>
@@ -93,28 +58,11 @@
 defineEmits(['toggle-sidebar', 'open-search'])
 
 const isDark = ref(false)
-const showAuth = ref(false)
-const profileOpen = ref(false)
-const profileRef = ref<HTMLElement | null>(null)
-const auth = useAuth()
-
-const initials = computed(() => {
-  const email = auth.userEmail.value ?? ''
-  const [local] = email.split('@')
-  return local.slice(0, 2).toUpperCase() || '??'
-})
 
 onMounted(() => {
-  showAuth.value = true
   const stored = localStorage.getItem('color-mode')
   isDark.value = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
   applyTheme()
-
-  document.addEventListener('click', (e) => {
-    if (profileRef.value && !profileRef.value.contains(e.target as Node)) {
-      profileOpen.value = false
-    }
-  })
 })
 
 function toggleColorMode() {
@@ -134,8 +82,4 @@ function applyTheme() {
   }
 }
 
-function handleLogout() {
-  auth.logout()
-  navigateTo('/')
-}
 </script>

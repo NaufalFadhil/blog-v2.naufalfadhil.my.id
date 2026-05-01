@@ -64,10 +64,5 @@ export default defineNuxtConfig({
     },
   },
 
-  runtimeConfig: {
-    authPasswordHash: process.env.NUXT_AUTH_PASSWORD_HASH ?? '',
-    sessionSecret: process.env.NUXT_SESSION_SECRET ?? '',
-  },
-
   compatibilityDate: '2024-11-01',
 })

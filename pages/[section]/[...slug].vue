@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const auth = useAuth()
 
 const section = String(route.params.section ?? '').replace(/[^a-z0-9-]/g, '')
 const rawSlug = Array.isArray(route.params.slug) ? route.params.slug.join('/') : route.params.slug
@@ -27,10 +26,4 @@ const { data: doc } = await useAsyncData(`content-${path}`, () =>
 if (!doc.value) {
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 }
-
-onMounted(() => {
-  if (doc.value && !auth.canAccess(doc.value as Record<string, unknown>)) {
-    navigateTo(`/login?redirect=${encodeURIComponent(route.path)}`)
-  }
-})
 </script>

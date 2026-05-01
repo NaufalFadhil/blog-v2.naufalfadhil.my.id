@@ -5,9 +5,6 @@ interface SearchItem {
   title: string
   description: string
   tags: string[]
-  draft?: boolean
-  internal?: boolean
-  internal_access?: string[]
 }
 
 interface SearchResult {
@@ -28,28 +25,15 @@ let contentLoaded = false
 let keyboardBound = false
 
 export function useSearch() {
-  const auth = useAuth()
-
   const loadContent = async () => {
     if (contentLoaded) return
 
     try {
-      let items: SearchItem[]
-
-      if (auth.isAuthenticated.value) {
-        // Fetch all content (including protected), then filter by access
-        const all = await queryContent('/')
-          .where({ _partial: false })
-          .only(['_path', 'title', 'description', 'tags', 'draft', 'internal', 'internal_access'])
-          .find()
-        items = all.filter((item) => auth.canAccess(item as Record<string, unknown>)) as SearchItem[]
-      } else {
-        const all = await queryContent('/')
-          .where({ _partial: false, draft: { $ne: true }, internal: { $ne: true }, external: { $ne: true } })
-          .only(['_path', 'title', 'description', 'tags'])
-          .find()
-        items = all as SearchItem[]
-      }
+      const all = await queryContent('/')
+        .where({ _partial: false, draft: { $ne: true } })
+        .only(['_path', 'title', 'description', 'tags'])
+        .find()
+      const items = all as SearchItem[]
 
       const searchItems: SearchItem[] = items.map((item) => ({
         _path: item._path ?? '',
@@ -140,13 +124,6 @@ export function useSearch() {
       close()
     }
   }
-
-  // Reset search cache when auth state changes so protected content is included/excluded
-  watch(auth.isAuthenticated, () => {
-    contentLoaded = false
-    fuseInstance = null
-    results.value = []
-  })
 
   // Ctrl+K global shortcut (bind once)
   if (import.meta.client && !keyboardBound) {

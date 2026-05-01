@@ -27,3 +27,4 @@ const search = useSearch()
 onMounted(() => {
   sidebarOpen.value = window.innerWidth >= 1024
 })
+</script>
