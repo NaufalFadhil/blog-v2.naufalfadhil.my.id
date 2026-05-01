@@ -22,7 +22,7 @@
             :to="section.path"
             class="group p-5 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-primary-400 dark:hover:border-primary-600 bg-white dark:bg-gray-900 transition-all hover:shadow-md"
           >
-            <div class="text-2xl mb-3">{{ section.icon }}</div>
+            <SectionIcon :name="section.path.slice(1)" cls="w-7 h-7 mb-3 text-gray-600 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" />
             <h2 class="font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
               {{ section.label }}
             </h2>
@@ -77,8 +77,9 @@
             :to="section.path"
             class="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors group"
           >
-            <span class="text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
-              {{ section.icon }} {{ section.label }}
+            <span class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white">
+              <SectionIcon :name="section.path.slice(1)" cls="w-4 h-4 shrink-0" :stroke-width="2" />
+              {{ section.label }}
             </span>
             <span class="text-xs font-medium text-gray-400 dark:text-gray-500 tabular-nums">
               {{ section.count }}
@@ -119,28 +120,24 @@ const sections = computed(() => {
     {
       path: '/competitive-programming',
       label: 'Competitive Programming',
-      icon: '🏆',
       description: 'Algorithms, data structures, and problem solving',
       count: items.filter((i) => i._path?.startsWith('/competitive-programming')).length,
     },
     {
       path: '/docker',
       label: 'Docker',
-      icon: '🐳',
       description: 'Containers, images, and orchestration',
       count: items.filter((i) => i._path?.startsWith('/docker')).length,
     },
     {
       path: '/javascript',
       label: 'JavaScript',
-      icon: '🟨',
       description: 'JS patterns, APIs, and runtime behavior',
       count: items.filter((i) => i._path?.startsWith('/javascript')).length,
     },
     {
       path: '/php',
       label: 'PHP',
-      icon: '🐘',
       description: 'PHP language features and design patterns',
       count: items.filter((i) => i._path?.startsWith('/php')).length,
     },
