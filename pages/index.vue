@@ -118,10 +118,10 @@ const sections = computed(() => {
   const items = allContent.value ?? []
   return [
     {
-      path: '/competitive-programming',
-      label: 'Competitive Programming',
+      path: '/data-structure-algorithm',
+      label: 'DSA Handbook',
       description: 'Algorithms, data structures, and problem solving',
-      count: items.filter((i) => i._path?.startsWith('/competitive-programming')).length,
+      count: items.filter((i) => i._path?.startsWith('/data-structure-algorithm')).length,
     },
     {
       path: '/docker',

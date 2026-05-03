@@ -100,7 +100,7 @@ const { data: allContent } = await useAsyncData('sidebar-content', () =>
 )
 
 const sectionConfig = [
-  { prefix: '/competitive-programming', label: 'Competitive Programming' },
+  { prefix: '/data-structure-algorithm', label: 'DSA Handbook' },
   { prefix: '/docker', label: 'Docker' },
   { prefix: '/javascript', label: 'JavaScript' },
   { prefix: '/php', label: 'PHP' },

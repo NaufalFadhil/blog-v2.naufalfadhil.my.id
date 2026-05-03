@@ -1,6 +1,6 @@
 <template>
-  <!-- Competitive Programming: trophy cup -->
-  <svg v-if="name === 'competitive-programming'" viewBox="0 0 24 24" fill="none" stroke="currentColor" :stroke-width="strokeWidth" stroke-linecap="round" stroke-linejoin="round" :class="cls">
+  <!-- DSA Handbook: trophy cup -->
+  <svg v-if="name === 'data-structure-algorithm'" viewBox="0 0 24 24" fill="none" stroke="currentColor" :stroke-width="strokeWidth" stroke-linecap="round" stroke-linejoin="round" :class="cls">
     <path d="M6 3h12v7a6 6 0 01-12 0V3z"/>
     <path d="M6 5H3.5A1.5 1.5 0 002 6.5v1A3.5 3.5 0 005.5 11"/>
     <path d="M18 5h2.5A1.5 1.5 0 0122 6.5v1A3.5 3.5 0 0118.5 11"/>
