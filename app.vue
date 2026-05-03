@@ -2,6 +2,7 @@
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
+  <CursorGlow />
 </template>
 
 <script setup lang="ts">
