@@ -51,11 +51,14 @@ function formatSegment(slug: string): string {
 
 const crumbs = computed(() => {
   const parts = route.path.split('/').filter(Boolean)
-  if (parts.length === 0) return []
 
-  return parts.map((seg, i) => ({
+  const home = { label: 'Home', path: '/' }
+
+  if (parts.length === 0) return [home]
+
+  return [home, ...parts.map((seg, i) => ({
     label: formatSegment(seg),
     path: '/' + parts.slice(0, i + 1).join('/'),
-  }))
+  }))]
 })
 </script>

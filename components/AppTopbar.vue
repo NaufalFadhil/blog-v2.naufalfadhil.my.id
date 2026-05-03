@@ -27,7 +27,7 @@
       <div class="flex-1 flex items-center justify-between min-w-0 pr-4 lg:pr-6">
         <AppBreadcrumb />
 
-        <div class="flex items-center gap-2 shrink-0">
+        <div class="flex items-center gap-2 shrink-0 ml-auto">
         <button
           class="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           @click="$emit('open-search')"
