@@ -10,7 +10,7 @@
     <main
       :class="[
         'flex-1 min-w-0 px-4 lg:px-8 py-8 transition-[margin] duration-200 ease-in-out',
-        sidebarOpen ? 'lg:ml-64' : '',
+        sidebarOpen ? 'lg:ml-72' : '',
       ]"
     >
       <slot />

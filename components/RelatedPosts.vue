@@ -6,7 +6,7 @@
         v-for="post in related"
         :key="post._path"
         :to="post._path"
-        class="block p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
+        class="block p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/60 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
       >
         <h4 class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
           {{ post.title }}
@@ -14,11 +14,12 @@
         <p v-if="post.description" class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
           {{ post.description }}
         </p>
-        <div v-if="post.tags?.length" class="flex gap-1 mt-2">
+        <div v-if="post.tags?.length" class="flex flex-wrap gap-1 mt-2">
           <span
             v-for="tag in post.tags.slice(0, 3)"
             :key="tag"
-            class="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"
+            :class="tagColor(tag)"
+            class="text-[10px] px-1.5 py-0.5 rounded font-medium"
           >
             {{ tag }}
           </span>
@@ -45,4 +46,6 @@ watch(
   },
   { immediate: true }
 )
+
+const { tagColor } = useTagColor()
 </script>

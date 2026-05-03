@@ -4,9 +4,8 @@
       v-for="tag in tags"
       :key="tag"
       :to="`/tags/${tag}`"
-      class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full transition-colors
-             bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300
-             hover:bg-primary-100 dark:hover:bg-primary-900/50 hover:text-primary-700 dark:hover:text-primary-300"
+      :class="tagColor(tag)"
+      class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full transition-opacity hover:opacity-80"
     >
       {{ tag }}
     </NuxtLink>
@@ -15,4 +14,5 @@
 
 <script setup lang="ts">
 defineProps<{ tags: string[] }>()
+const { tagColor } = useTagColor()
 </script>
