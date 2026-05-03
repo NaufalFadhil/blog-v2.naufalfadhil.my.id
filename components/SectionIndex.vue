@@ -11,19 +11,19 @@
         v-for="post in (posts ?? [])"
         :key="post._path"
         :to="post._path"
-        class="flex items-center justify-between gap-4 px-6 py-3 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
+        class="flex items-center justify-between gap-4 px-6 py-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/60 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
       >
         <div class="min-w-0">
-          <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 mb-0.5">
+          <div class="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 mb-1">
             <span v-for="(crumb, idx) in getBreadcrumbs(post._path)" :key="idx" class="flex items-center gap-1">
               <span v-if="idx > 0" class="text-gray-300 dark:text-gray-600">/</span>
               <span>{{ formatCrumb(crumb) }}</span>
             </span>
           </div>
-          <span class="text-sm font-medium text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+          <span class="text-base font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
             {{ post.title }}
           </span>
-          <p v-if="post.description" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-1">
+          <p v-if="post.description" class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-1">
             {{ post.description }}
           </p>
         </div>
@@ -32,12 +32,13 @@
             <span
               v-for="tag in (post.tags ?? []).slice(0, 2)"
               :key="tag"
-              class="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400"
+              :class="tagColor(tag)"
+              class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-full"
             >
               {{ tag }}
             </span>
           </div>
-          <span v-if="post.date" class="text-xs text-gray-400">
+          <span v-if="post.date" class="text-sm text-gray-400">
             {{ formatDate(post.date) }}
           </span>
         </div>
@@ -53,6 +54,8 @@
 </template>
 
 <script setup lang="ts">
+const { tagColor } = useTagColor()
+
 const props = defineProps<{
   section: string
   title: string

@@ -138,3 +138,31 @@ html.dark .prose pre {
 .heading-anchor {
   @apply absolute -left-6 top-0 opacity-0 text-gray-400 hover:text-primary-500 transition-opacity no-underline;
 }
+
+/* Table card wrapper */
+.prose table {
+  @apply w-full border-separate border-spacing-0 rounded-xl overflow-hidden
+         border border-gray-200 dark:border-gray-700
+         bg-white dark:bg-gray-800/60
+         shadow-sm;
+}
+
+.prose thead tr th {
+  @apply px-5 py-3 text-left text-sm font-semibold
+         text-gray-700 dark:text-gray-200
+         bg-gray-50 dark:bg-gray-700/60
+         border-b border-gray-200 dark:border-gray-700;
+}
+
+.prose tbody tr td {
+  @apply px-5 py-3 text-sm text-gray-700 dark:text-gray-300
+         border-b border-gray-100 dark:border-gray-700/60;
+}
+
+.prose tbody tr:last-child td {
+  @apply border-b-0;
+}
+
+.prose tbody tr:hover td {
+  @apply bg-gray-50/60 dark:bg-gray-700/30;
+}
