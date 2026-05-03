@@ -38,6 +38,12 @@ export default defineNuxtConfig({
         { property: 'og:type', content: 'website' },
       ],
       link: [],
+      script: [
+        {
+          innerHTML: `(function(){var m=localStorage.getItem('color-mode');if(m==='dark'||(m===null&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}})()`,
+          type: 'text/javascript',
+        },
+      ],
     },
   },
 

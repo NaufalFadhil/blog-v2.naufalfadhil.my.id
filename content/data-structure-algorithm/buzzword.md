@@ -1,11 +1,12 @@
 ---
-title: "Word List DSA"
+title: "Buzzword List DSA"
 tags: [dsa, algorithms, data-structures]
 date: 2026-04-03
 description: "Common terms and concepts in data structures and algorithms."
 weight: 1
 ---
 
+# Buzzword List DSA: Istilah yang Sering Muncul di Problem Statement
 Banyak orang stuck di soal DSA bukan karena algoritmanya susah, tapi karena salah baca instruksi. Satu kata kayak _"subsequence"_ vs _"subarray"_ atau _"strictly increasing"_ vs _"non-decreasing"_ bisa bikin solusi yang technically benar jadi salah jawaban.
 
 Berikut word list yang sering muncul di problem statement, dikelompokkan per kategori biar gampang dicari pas lagi practice.
