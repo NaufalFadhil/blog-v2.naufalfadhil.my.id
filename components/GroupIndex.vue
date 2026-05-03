@@ -7,7 +7,7 @@
 
       <div class="space-y-3">
         <NuxtLink
-          v-for="post in (posts ?? [])"
+          v-for="post in posts"
           :key="post._path"
           :to="post._path"
           class="flex items-center justify-between gap-4 px-6 py-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800/60 hover:border-primary-300 dark:hover:border-primary-700 transition-colors group"
@@ -38,7 +38,7 @@
         </NuxtLink>
       </div>
 
-      <p v-if="!posts?.length" class="text-center py-12 text-gray-500 dark:text-gray-400">
+      <p v-if="!posts.length" class="text-center py-12 text-gray-500 dark:text-gray-400">
         No content yet.
       </p>
     </div>
@@ -49,18 +49,10 @@
 <script setup lang="ts">
 const { tagColor } = useTagColor()
 
-const props = defineProps<{
-  path: string
+defineProps<{
+  posts: { _path: string; title?: string; description?: string; tags?: string[]; date?: string }[]
   title: string
 }>()
-
-const { data: posts } = await useAsyncData(`group-${props.path}`, () =>
-  queryContent(props.path)
-    .where({ _partial: false, draft: { $ne: true } })
-    .only(['_path', 'title', 'description', 'tags', 'date'])
-    .sort({ date: -1 })
-    .find()
-)
 
 function formatDate(date: string): string {
   return new Date(date).toLocaleDateString('en-US', {
@@ -68,8 +60,4 @@ function formatDate(date: string): string {
     day: 'numeric',
   })
 }
-
-useHead({
-  title: `${props.title} — Naufal Fadhil`,
-})
 </script>
