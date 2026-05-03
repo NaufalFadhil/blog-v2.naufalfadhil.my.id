@@ -20,7 +20,7 @@
             v-for="section in sections"
             :key="section.path"
             :to="section.path"
-            class="group p-5 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-primary-400 dark:hover:border-primary-600 bg-white dark:bg-gray-900 transition-all hover:shadow-md"
+            class="group p-5 rounded-xl border border-gray-200 dark:border-gray-800 hover:border-primary-400 dark:hover:border-primary-600 bg-white dark:bg-gray-800 transition-all hover:shadow-md"
           >
             <SectionIcon :name="section.path.slice(1)" cls="w-7 h-7 mb-3 text-gray-600 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors" />
             <h2 class="font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">

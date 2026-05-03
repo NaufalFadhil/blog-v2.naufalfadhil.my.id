@@ -14,7 +14,7 @@
 
         <!-- Modal -->
         <div class="fixed inset-x-0 top-[15vh] mx-auto max-w-xl px-4">
-          <div class="bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+          <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
             <!-- Search Input -->
             <div class="flex items-center px-4 border-b border-gray-200 dark:border-gray-700">
               <svg class="w-5 h-5 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

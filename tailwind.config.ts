@@ -14,7 +14,7 @@ export default <Config>{
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Geist Sans', 'system-ui', '-apple-system', 'sans-serif'],
       },
       colors: {
         primary: {

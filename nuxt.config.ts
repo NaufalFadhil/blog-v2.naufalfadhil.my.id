@@ -37,11 +37,7 @@ export default defineNuxtConfig({
         { property: 'og:description', content: 'Personal documentation, snippets, and notes' },
         { property: 'og:type', content: 'website' },
       ],
-      link: [
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' },
-      ],
+      link: [],
     },
   },
 
@@ -58,7 +54,7 @@ export default defineNuxtConfig({
           'X-XSS-Protection': '1; mode=block',
           'Referrer-Policy': 'strict-origin-when-cross-origin',
           'Permissions-Policy': 'geolocation=(), microphone=(), camera=()',
-          'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' fonts.googleapis.com; font-src 'self' fonts.gstatic.com; img-src 'self' data:; connect-src 'self'",
+          'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'",
         },
       },
     },

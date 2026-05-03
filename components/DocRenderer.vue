@@ -18,7 +18,7 @@
     </header>
 
     <!-- Body -->
-    <div class="prose prose-gray dark:prose-invert max-w-none prose-headings:scroll-mt-20">
+    <div class="prose prose-lg prose-gray dark:prose-invert max-w-none prose-headings:scroll-mt-20">
       <ContentRenderer :value="doc" />
     </div>
 
