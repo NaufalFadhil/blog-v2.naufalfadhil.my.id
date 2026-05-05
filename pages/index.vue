@@ -98,13 +98,16 @@
 </template>
 
 <script setup lang="ts">
+const sectionRoots = ['/data-structure-algorithm', '/docker', '/javascript', '/php', '/python', '/java', '/rust', '/jenkins', '/cpp']
+
 const { data: recentPosts } = await useAsyncData('recent-posts', () =>
   queryContent('/')
     .where({ _partial: false, draft: { $ne: true } })
     .only(['_path', 'title', 'date'])
     .sort({ date: -1 })
-    .limit(3)
+    .limit(10)
     .find()
+    .then((posts) => posts.filter((p) => !sectionRoots.includes(p._path ?? '')).slice(0, 3))
 )
 
 const { data: allContent } = await useAsyncData('section-counts', () =>
@@ -114,34 +117,24 @@ const { data: allContent } = await useAsyncData('section-counts', () =>
     .find()
 )
 
+const sectionMeta = [
+  { path: '/data-structure-algorithm', label: 'DSA Handbook', description: 'Algorithms, data structures, and problem solving' },
+  { path: '/docker', label: 'Docker', description: 'Containers, images, and orchestration' },
+  { path: '/javascript', label: 'JavaScript', description: 'JS patterns, APIs, and runtime behavior' },
+  { path: '/php', label: 'PHP', description: 'PHP language features and design patterns' },
+  { path: '/python', label: 'Python', description: 'Python snippets and references' },
+  { path: '/java', label: 'Java', description: 'Java patterns and best practices' },
+  { path: '/rust', label: 'Rust', description: 'Rust systems programming notes' },
+  { path: '/jenkins', label: 'Jenkins', description: 'CI/CD pipelines and automation' },
+  { path: '/cpp', label: 'C++ / CPP', description: 'C++ language features and patterns' },
+]
+
 const sections = computed(() => {
   const items = allContent.value ?? []
-  return [
-    {
-      path: '/data-structure-algorithm',
-      label: 'DSA Handbook',
-      description: 'Algorithms, data structures, and problem solving',
-      count: items.filter((i) => i._path?.startsWith('/data-structure-algorithm')).length,
-    },
-    {
-      path: '/docker',
-      label: 'Docker',
-      description: 'Containers, images, and orchestration',
-      count: items.filter((i) => i._path?.startsWith('/docker')).length,
-    },
-    {
-      path: '/javascript',
-      label: 'JavaScript',
-      description: 'JS patterns, APIs, and runtime behavior',
-      count: items.filter((i) => i._path?.startsWith('/javascript')).length,
-    },
-    {
-      path: '/php',
-      label: 'PHP',
-      description: 'PHP language features and design patterns',
-      count: items.filter((i) => i._path?.startsWith('/php')).length,
-    },
-  ]
+  return sectionMeta.map((s) => ({
+    ...s,
+    count: items.filter((i) => i._path?.startsWith(s.path) && !sectionRoots.includes(i._path ?? '')).length,
+  }))
 })
 
 const upperCaseWords = new Set(['php', 'css', 'html', 'js', 'ts', 'sql', 'api', 'cli', 'sdk', 'ui', 'ux', 'ci', 'cd', 'aws', 'gcp', 'npm', 'vue', 'jwt', 'ssh', 'dns', 'tcp', 'udp', 'http', 'https', 'til'])
