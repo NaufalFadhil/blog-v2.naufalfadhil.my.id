@@ -119,6 +119,11 @@ const sectionConfig = [
   { prefix: '/docker', label: 'Docker' },
   { prefix: '/javascript', label: 'JavaScript' },
   { prefix: '/php', label: 'PHP' },
+  { prefix: '/python', label: 'Python' },
+  { prefix: '/java', label: 'Java' },
+  { prefix: '/rust', label: 'Rust' },
+  { prefix: '/jenkins', label: 'Jenkins' },
+  { prefix: '/cpp', label: 'C++' },
 ]
 
 interface ContentItem {
